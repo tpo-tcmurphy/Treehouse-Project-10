@@ -4,6 +4,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const routes = require('./routes/routes')
+const cors = require('cors') // Enables connection to React application
 
 /**
  * From Sequelize documentation - used for testing database connection (~line 67)
@@ -16,6 +17,9 @@ const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'tr
 
 // create the Express app
 const app = express()
+
+// Enable CORS Requests
+app.use(cors())
 
 // Setup request body JSON parsing.
 app.use(express.json())

@@ -1,4 +1,3 @@
-import './App.css'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -10,9 +9,9 @@ function App () {
     axios(`http://localhost:5000/api/${routePath}`)
       .then(response => response.data)
       .then(data => setDataState(data))
-    return () => {
-      console.log('cleanup')
-    }
+    // return () => {
+    //   console.log('placeholder for cleanup - disregard')
+    // }
   }, [routePath])
 
   return (

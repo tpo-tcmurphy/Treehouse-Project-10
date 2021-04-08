@@ -9,9 +9,9 @@ function App () {
     axios(`http://localhost:5000/api/${routePath}`)
       .then(response => response.data)
       .then(data => setDataState(data))
-    // return () => {
-    //   console.log('placeholder for cleanup - disregard')
-    // }
+    return () => {
+      setDataState([])
+    }
   }, [routePath])
 
   return (

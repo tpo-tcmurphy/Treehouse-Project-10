@@ -1,8 +1,8 @@
-import './App.css';
+import './App.css'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-function App() {
+function App () {
   const [dataState, setDataState] = useState([])
   const [routePath, setRoutePath] = useState('courses')
 
@@ -22,7 +22,7 @@ function App() {
         return <li key={JSON.stringify(data.title)}>{JSON.stringify(data.title)}</li>
       })}
     </>
-  );
+  )
 }
 
-export default App;
+export default App

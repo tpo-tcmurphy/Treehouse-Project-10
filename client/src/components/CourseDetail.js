@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import '../styles/index.css'
-import ReactMarkDown from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,16 +12,25 @@ import {
 function CourseDetail () {
   // const { id } = useParams()
   const [dataState, setDataState] = useState([])
+  const [user, setUser] = useState('')
   // const [routePath, setRoutePath] = useState(`courses/${id}`)
-
   useEffect(() => {
     axios(`http://localhost:5000/api/courses/${1}`)
-      .then(response => response.data)
-      .then(data => setDataState(data))
-    return () => {
-      setDataState([])
-    }
+      .then((response) => {
+        setDataState(response.data)
+        setUser(`${response.data.User.firstName} ${response.data.User.lastName}`)
+      })
   }, [1])
+
+  //   useEffect(() => {
+  //     axios(`http://localhost:5000/api/courses/${1}`)
+  //       .then(response => response.data)
+  //       .then(data => setDataState(data))
+  //       .then(data => setUser(`${data.User.firstName} ${data.User.lastName}`))
+  //   },
+
+  //   [1])
+  //   console.log(user)
   return (
     <main>
       <div className='actions--bar'>
@@ -39,7 +48,7 @@ function CourseDetail () {
             <div>
               <h3 className='course--detail--title'>Course</h3>
               <h4 className='course--name'>{dataState.title}</h4>
-              <p>By {dataState.firstName} {dataState.lastName}</p>
+              <p>By {user}</p>
             </div>
             <div>
               <h3 className='course--detail--title'>Estimated Time</h3>
@@ -47,7 +56,7 @@ function CourseDetail () {
 
               <h3 className='course--detail--title'>Materials Needed</h3>
               <ul className='course--detail--list'>
-                <li>{dataState.materialsNeeded}</li>
+                <ReactMarkdown source={dataState.materialsNeeded} />
 
               </ul>
             </div>

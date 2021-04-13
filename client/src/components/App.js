@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Courses from './Courses'
+import CourseDetail from './CourseDetail'
 import '../styles/index.css'
 import axios from 'axios'
 
@@ -20,6 +21,7 @@ function App () {
         </div>
       </header>
       <Courses />
+      <CourseDetail />
     </>
   )
 }

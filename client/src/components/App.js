@@ -1,4 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import {
+  Link,
+  BrowserRouter,
+  Switch,
+  Route,
+  useParams
+} from 'react-router-dom'
 import Header from './Header'
 import Courses from './Courses'
 import CourseDetail from './CourseDetail'
@@ -10,9 +17,12 @@ import axios from 'axios'
 function App () {
   return (
     <>
-      <Header />
-      <Courses />
-      <CourseDetail />
+      <BrowserRouter>
+        <Header />
+        <Courses />
+        <CourseDetail />
+      </BrowserRouter>
+
     </>
   )
 }

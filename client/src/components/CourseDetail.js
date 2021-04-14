@@ -22,15 +22,6 @@ function CourseDetail (props) {
       })
   }, [1])
 
-  //   useEffect(() => {
-  //     axios(`http://localhost:5000/api/courses/${1}`)
-  //       .then(response => response.data)
-  //       .then(data => setDataState(data))
-  //       .then(data => setUser(`${data.User.firstName} ${data.User.lastName}`))
-  //   },
-
-  //   [1])
-  //   console.log(user)
   return (
     <main>
       <div className='actions--bar'>
@@ -68,12 +59,3 @@ function CourseDetail (props) {
   )
 }
 export default CourseDetail
-/* <>
-      <Router><Route path='/api/courses/:id'>CourseDetaillink</Route></Router>
-      <h2>{1}</h2>
-
-      <li key={JSON.stringify(dataState.title)}>{JSON.stringify(dataState.title)} </li>
-
-    </>
-  ) */
-// <li key={JSON.stringify(material.materialsNeeded)}>{JSON.stringify(material.materialsNeeded)} </li>

@@ -41,10 +41,12 @@ router.post('/api/users', asyncHandler(async (req, res, next) => {
 router.get('/api/courses', asyncHandler(async (req, res, next) => {
   const courses = await Course.findAll({
     attributes: [
+      'id',
       'title',
       'description',
       'estimatedTime',
-      'materialsNeeded'
+      'materialsNeeded',
+      'userId'
     ],
     include: [
       {
@@ -73,10 +75,12 @@ router.get('/api/courses', asyncHandler(async (req, res, next) => {
 router.get('/api/courses/:id', asyncHandler(async (req, res, next) => {
   const course = await Course.findByPk(req.params.id, {
     attributes: [
+      'id',
       'title',
       'description',
       'estimatedTime',
-      'materialsNeeded'
+      'materialsNeeded',
+      'userId'
     ],
     include: [
       {

@@ -12,8 +12,7 @@ function Courses () {
 
   useEffect(() => {
     axios(`http://localhost:5000/api/${routePath}`)
-      .then(response => response.data)
-      .then(data => setDataState(data))
+      .then(response => setDataState(response.data))
     return () => {
       setDataState([])
     }

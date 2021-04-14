@@ -31,19 +31,21 @@ describe('The h1 in the header', () => {
     container = document.querySelector('.header--logo')
     expect(container).toHaveClass('header--logo')
   })
-  // Failing
-  it('Should have a link attribute', async () => {
-    const actual = document.querySelector('a')
-    expect(actual).toHaveTextContent('Courses')
-  })
-  // Failing
   it('Should contain the text Courses in the link', async () => {
     const h1Text = 'Courses'
-    expect(headerLink).toHaveTextContent(h1Text)
+    expect(container).toHaveTextContent(h1Text)
   })
-  // Failing
-  it('Should have a NAV as a child element', async () => {
-    const headerNav = await document.getElementsByTagName('nav')
-    expect(container).toContainElement(headerNav)
+})
+
+describe('The NAV in the header', () => {
+  let container
+  beforeAll(async () => {
+    await act(async () => {
+      render(<Header />)
+    })
+  })
+  it('Should have a UL with the correct class', async () => {
+    container = document.querySelector('.header--signedout')
+    expect(container).toHaveClass('header--signedout')
   })
 })

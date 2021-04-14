@@ -21,7 +21,7 @@ function Courses () {
 
   const courses = dataState.map((data, index) => {
     return (
-      <Link className='course--module course--link' key={JSON.stringify(data.id)} to={'/api/courses/' + JSON.stringify(data.id)}>
+      <Link className='course--module course--link' key={JSON.stringify(data.id)} to={'/courses/' + JSON.stringify(data.id)}>
         <h2 className='course--label'>Course</h2>
         <h3 className='course--title'>{JSON.stringify(data.title)}</h3>
       </Link>

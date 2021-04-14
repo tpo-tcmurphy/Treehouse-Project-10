@@ -45,6 +45,7 @@ describe('The NAV in the header', () => {
     })
   })
   it('Should have a UL with the correct class', async () => {
+    await screen.findAllByText('Courses')
     container = document.querySelector('.header--signedout')
     expect(container).toHaveClass('header--signedout')
   })

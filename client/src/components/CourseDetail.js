@@ -9,7 +9,7 @@ import {
   useParams
 } from 'react-router-dom'
 
-function CourseDetail () {
+function CourseDetail (props) {
   // const { id } = useParams()
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')

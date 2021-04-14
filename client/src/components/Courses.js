@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import {
+  Link,
+  BrowserRouter,
+  Switch,
+  Route,
+  useParams
+} from 'react-router-dom'
 import axios from 'axios'
 import '../styles/index.css'
 
 // TODO: Pull in course detail component to have unique keys be course ID
 
-function Courses () {
+function Courses() {
   const [dataState, setDataState] = useState([])
   const [routePath, setRoutePath] = useState('courses')
 
@@ -20,12 +27,14 @@ function Courses () {
   return (
     <main>
       <div className='wrap main--grid'>
-        {dataState.map(data => {
+        {dataState.map((data, index) => {
           return (
-            <a className='course--module course--link' href='course-detail.html' key={JSON.stringify(data.title)}>
-              <h2 className='course--label' key={JSON.stringify(data.title)}>Course</h2>
-              <h3 className='course--title' key={JSON.stringify(data.title)}>{JSON.stringify(data.title)}</h3>
-            </a>
+            <BrowserRouter key={index}>
+              <Link className='course--module course--link' key={data.Id} to={`/courses/${data.Id}`}>
+                <h2 className='course--label'>Course</h2>
+                <h3 className='course--title'>{JSON.stringify(data.title)}</h3>
+              </Link>
+            </BrowserRouter>
           )
         })}
         <a className='course--module course--add--module' href='create-course.html'>

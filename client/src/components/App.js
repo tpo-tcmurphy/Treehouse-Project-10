@@ -19,8 +19,10 @@ function App () {
     <>
       <BrowserRouter>
         <Header />
-        <Courses />
-        <CourseDetail />
+        <Switch>
+          <Route exact path='/' render={() => <Courses />} />
+          <Route exact path='/course/:id' component={CourseDetail} />
+        </Switch>
       </BrowserRouter>
 
     </>

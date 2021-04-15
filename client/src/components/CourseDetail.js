@@ -10,17 +10,18 @@ import {
 } from 'react-router-dom'
 
 function CourseDetail (props) {
-  // const { id } = useParams()
+  const params = useParams()
+  const id = params.id
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
   // const [routePath, setRoutePath] = useState(`courses/${id}`)
   useEffect(() => {
-    axios(`http://localhost:5000/api/courses/${1}`)
+    axios(`http://localhost:5000/api/courses/${id}`)
       .then((response) => {
         setDataState(response.data)
         setUser(`${response.data.User.firstName} ${response.data.User.lastName}`)
       })
-  }, [1])
+  }, [id])
 
   return (
     <main>

@@ -1,5 +1,7 @@
 import React from 'react'
 import '../styles/index.css'
+import { Link } from 'react-router-dom'
+
 function Header () {
   return (
     <header>
@@ -8,7 +10,7 @@ function Header () {
         <nav>
           <ul className='header--signedout'>
             <li><a href='sign-up.html'>Sign Up</a></li>
-            <li><a href='sign-in.html'>Sign In</a></li>
+            <li><Link to='/signin'>Sign In</Link></li>
           </ul>
         </nav>
       </div>

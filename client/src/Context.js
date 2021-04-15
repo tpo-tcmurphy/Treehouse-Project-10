@@ -15,6 +15,24 @@ export class Provider extends Component {
     this.data = new Data()
   }
 
+  signIn = async (emailAddress, password) => {
+    const user = await this.data.getUser(emailAddress, password)
+    if (user !== null) {
+      this.setState(() => {
+        return {
+          authenticatedUser: user,
+        }
+      })
+      Cookies.set('authenticatedUser', JSON.stringify(user), {expires: 1})
+    }
+    return user
+  }
+
+  signOut = () => {
+    this.setState({ authenticatedUser: null })
+    Cookies.remove('authenticatedUser')
+  }
+
   render() {
     const { authenticatedUser } = this.state
     const value = {
@@ -30,28 +48,6 @@ export class Provider extends Component {
         {this.props.children}
       </Context.Provider>  
     )
-  }
-
-  
-  signIn = async (emailAddress, password) => {
-    const user = await this.data.getUser(emailAddress, password)
-    if (user !== null) {
-      this.setState(() => {
-        return {
-          authenticatedUser: user,
-        }
-      })
-      const cookieOptions = {
-        expires: 1 // 1 day
-      }
-      Cookies.set('authenticatedUser', JSON.stringify(user), {cookieOptions})
-    }
-    return user
-  }
-
-  signOut = () => {
-    this.setState({ authenticatedUser: null })
-    Cookies.remove('authenticatedUser')
   }
 }
 

@@ -46,6 +46,7 @@ export default class UserSignIn extends Component {
     e.preventDefault()
     const { context }  = this.props
     const { emailAddress, password } = this.state
+    console.log(this.props)
 
     context.actions.signIn(emailAddress, password)
       .then((user) => {

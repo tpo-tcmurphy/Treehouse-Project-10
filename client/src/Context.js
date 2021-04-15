@@ -10,7 +10,7 @@ export class Provider extends Component {
     authenticatedUser: Cookies.getJSON('authenticatedUser') || null
   }
 
-  constructor() {
+  constructor () {
     super()
     this.data = new Data()
   }
@@ -19,6 +19,7 @@ export class Provider extends Component {
     const user = await this.data.getUser(emailAddress, password)
     if (user !== null) {
       this.setState(() => {
+        user.password = password
         return {
           authenticatedUser: user,
         }
@@ -33,10 +34,15 @@ export class Provider extends Component {
     Cookies.remove('authenticatedUser')
   }
 
+  testFunction = () => {
+    console.log('test function working wtf')
+  }
+
   render() {
     const { authenticatedUser } = this.state
     const value = {
       authenticatedUser,
+      testFunction: this.testFunction,
       data: this.data,
       actions: {
         signIn: this.signIn,

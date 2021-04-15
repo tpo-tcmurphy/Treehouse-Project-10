@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
   Link,
   BrowserRouter,
@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 
 import '../styles/index.css'
-// import axios from 'axios'
+
 
 // Components
 import Header from './Header'

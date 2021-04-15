@@ -20,7 +20,7 @@ const Header = (props) => {
             :
             <>
               <ul className='header--signedout'>
-                <li><a href='sign-up.html'>Sign Up</a></li>
+                <li><Link to='/signup'>Sign Up</Link></li>
                 <li><Link to='/signin'>Sign In</Link></li>
               </ul>
             </>

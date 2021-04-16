@@ -1,9 +1,10 @@
 import axios from 'axios'
+//import UserSignUp from './components/UserSignUp'
 
 const apiBaseUrl = 'http://localhost:5000/api'
 
 export default class Data {
-  api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
+  api (path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
     const url = apiBaseUrl + path
 
     const options = {
@@ -19,12 +20,13 @@ export default class Data {
 
     if (requiresAuth) {
       const encodedCredentials = Buffer.from(`${credentials.emailAddress}:${credentials.password}`).toString('base64')
-      options.headers['Authorization'] = `Basic ${encodedCredentials}`
+      options.headers.Authorization = `Basic ${encodedCredentials}`
     }
     return axios(url, options)
   }
 
   async getUser (emailAddress, password) {
+    console.log(emailAddress, password)
     const response = await this.api('/users', 'GET', null, true, { emailAddress, password })
     if (response.status === 200) {
       return response
@@ -36,16 +38,22 @@ export default class Data {
   }
 
   async createUser (user) {
-    const response = await this.api('/users', 'POST', user)
-    if (response.status === 201) {
-      return []
-    } else if (response.status === 400) {
-      return response.json().then(data => {
-        return data.errors
-      })
-    } else {
-      throw new Error()
-    }
+    console.log('createUserCalled')
+    console.log(user)
+    const response = await this.api('/users', 'POST', user, false, null)
+    console.log('API Response Ran')
+    return response
+    // if (response.status === 201) {
+    //   return []
+    // } else if (response.status === 400) {
+    //   console.log('responseStatus 400')
+    //   return response.json().then(data => {
+    //     return data.errors
+    //   })
+    // } else {
+    //   console.log('error thrown')
+    //   throw new Error()
+    // }
   }
 
   async createCourse (course, emailAdress, password) {

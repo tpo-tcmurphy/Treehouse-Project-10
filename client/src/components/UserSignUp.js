@@ -34,6 +34,7 @@ export default class UserSignUp extends Component {
       password
     };
     console.log(user)
+    // Move below function to Data file?????
     await axios.post('http://localhost:5000/api/users', { firstName, lastName, emailAddress, password })
     // .then(errors => {
     //   if (errors.length) {

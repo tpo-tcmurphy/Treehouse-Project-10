@@ -1,14 +1,17 @@
 import axios from 'axios'
-//import UserSignUp from './components/UserSignUp'
 
+// Make a config/baseURL file to import with below variable:
 const apiBaseUrl = 'http://localhost:5000/api'
 
+// Make api function authorization header specific (remove other portions) and then pass into
+// axios.post (etc.) requests where needed
 export default class Data {
   api (path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
     const url = apiBaseUrl + path
 
     const options = {
       method,
+      // Might still need headers?
       headers: {
         'Content-Type': 'application/json; charset=utf-8'
       }
@@ -18,6 +21,7 @@ export default class Data {
       options.body = JSON.stringify(body)
     }
 
+    // Keep this!
     if (requiresAuth) {
       const encodedCredentials = Buffer.from(`${credentials.emailAddress}:${credentials.password}`).toString('base64')
       options.headers.Authorization = `Basic ${encodedCredentials}`
@@ -38,13 +42,13 @@ export default class Data {
     }
   }
 
-  // This is being used
-  async createUser (user) {
-    console.log('createUserCalled')
-    console.log(user)
-    const response = await this.api('/users', 'POST', user, false, null)
-    console.log('API Response Ran')
-    return response
+  // This is NOT being used
+  // async createUser (user) {
+  //   console.log('createUserCalled')
+  //   console.log(user)
+  //   const response = await this.api('/users', 'POST', user, false, null)
+  //   console.log('API Response Ran')
+  //   return response
     // if (response.status === 201) {
     //   return []
     // } else if (response.status === 400) {
@@ -56,7 +60,7 @@ export default class Data {
     //   console.log('error thrown')
     //   throw new Error()
     // }
-  }
+  // }
 
   // TBD
   async createCourse (course, emailAdress, password) {

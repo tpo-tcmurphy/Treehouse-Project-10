@@ -45,7 +45,6 @@ function CourseDetail (props) {
               <h3 className='course--detail--title'>Materials Needed</h3>
               <ul className='course--detail--list'>
                 <ReactMarkdown source={dataState.materialsNeeded} />
-
               </ul>
             </div>
           </div>

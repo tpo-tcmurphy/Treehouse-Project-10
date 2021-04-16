@@ -4,13 +4,9 @@ import {
   Route
 } from 'react-router-dom'
 import axios from 'axios'
-import CourseDetail from './CourseDetail'
-
-// TODO: Pull in course detail component to have unique keys be course ID
 
 function Courses () {
   const [dataState, setDataState] = useState([])
-  const [routePath, setRoutePath] = useState('courses')
 
   useEffect(() => {
     axios('http://localhost:5000/api/courses')

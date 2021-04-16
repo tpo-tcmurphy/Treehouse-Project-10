@@ -8,7 +8,7 @@ const Header = (props) => {
   return (
     <header>
       <div className='wrap header--flex'>
-        <h1 className='header--logo'><a href='index.html'>Courses</a></h1>
+        <h1 className='header--logo'><Link to='/'>Courses</Link></h1>
         <nav>
           {authUser ?
             <>

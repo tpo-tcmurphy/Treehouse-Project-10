@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import '../styles/index.css'
 import ReactMarkdown from 'react-markdown'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function CourseDetail (props) {
   const params = useParams()
@@ -24,7 +24,7 @@ function CourseDetail (props) {
         <div className='wrap'>
           <a className='button' href='update-course.html'>Update Course</a>
           <a className='button' href='#'>Delete Course</a>
-          <a className='button button-secondary' href='index.html'>Return to List</a>
+          <Link className='button button-secondary' to='/'>Return to List</Link>
         </div>
       </div>
 

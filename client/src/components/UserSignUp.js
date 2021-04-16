@@ -1,7 +1,7 @@
-
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+
 export default class UserSignUp extends Component {
   
   state = {
@@ -10,6 +10,7 @@ export default class UserSignUp extends Component {
     emailAddress: '',
     password: null,
   }
+  
   change = (event) => {
     const name = event.target.name
     const value = event.target.value

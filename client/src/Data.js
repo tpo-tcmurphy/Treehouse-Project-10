@@ -25,6 +25,7 @@ export default class Data {
     return axios(url, options)
   }
 
+  // This is being used
   async getUser (emailAddress, password) {
     console.log(emailAddress, password)
     const response = await this.api('/users', 'GET', null, true, { emailAddress, password })
@@ -37,6 +38,7 @@ export default class Data {
     }
   }
 
+  // This is being used
   async createUser (user) {
     console.log('createUserCalled')
     console.log(user)
@@ -56,6 +58,7 @@ export default class Data {
     // }
   }
 
+  // TBD
   async createCourse (course, emailAdress, password) {
     const response = await this.api('/courses', 'POST', course)
     if (response.status === 201) {
@@ -69,6 +72,7 @@ export default class Data {
     }
   }
 
+  // TBD
   async updateCourse (courseId, course, emailAddress, password) {
     const response = await this.api('/courses/' + courseId, 'PUT', course, true, { emailAddress, password })
     if (response.status === 204) {
@@ -82,6 +86,7 @@ export default class Data {
     }
   }
 
+  // TBD
   async deleteCourse (courseId, emailAddress, password) {
     const response = await this.api('/courses/' + courseId, 'DELETE', null, true, { emailAddress, password })
     if (response.status === 204) {

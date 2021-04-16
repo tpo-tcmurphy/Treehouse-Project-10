@@ -2,19 +2,14 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import '../styles/index.css'
 import ReactMarkdown from 'react-markdown'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useParams
-} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 function CourseDetail (props) {
   const params = useParams()
   const id = params.id
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
-  // const [routePath, setRoutePath] = useState(`courses/${id}`)
+
   useEffect(() => {
     axios(`http://localhost:5000/api/courses/${id}`)
       .then((response) => {
@@ -41,6 +36,7 @@ function CourseDetail (props) {
               <h3 className='course--detail--title'>Course</h3>
               <h4 className='course--name'>{dataState.title}</h4>
               <p>By {user}</p>
+              <ReactMarkdown source={dataState.description} />
             </div>
             <div>
               <h3 className='course--detail--title'>Estimated Time</h3>

@@ -80,7 +80,8 @@ export default class CreateCourse extends Component {
     courseTitle: '',
     courseDescription: '',
     estimatedTime: '',
-    materialsNeeded: ''
+    materialsNeeded: '',
+    userId: ''
   }
   
   
@@ -125,7 +126,7 @@ export default class CreateCourse extends Component {
   submit = async (e) => {
     e.preventDefault()
     const { context }  = this.props
-    const {courseTitle, courseDescription, estimatedTime, materialsNeeded } = this.state
+    const {courseTitle, courseDescription, estimatedTime, materialsNeeded, userId} = this.state
     const authUser = context.authenticatedUser
 
     const course = {
@@ -133,29 +134,53 @@ export default class CreateCourse extends Component {
       courseDescription,
       estimatedTime,
       materialsNeeded,
+      userId
     }
 
     const authCreds = {
       emailAddress: authUser.data.emailAddress,
-      password: authUser.password
+      password: authUser.password,
+      userId: authUser.userId
     }
 
     console.log(course)
     
     console.log(authUser.data.emailAddress, authUser.password)
     // Move below function to Data file?????
-    await axios.post('http://localhost:5000/api/courses', authCreds, course )
-      .then(() => {
-        console.log('This course has been created!')
+
+    context.data.createCourse(course, authCreds.emailAddress, authCreds.password)
+    .then(() => {
+      console.log('This course has been created!')
+      
+      this.props.history.push('/')})
+    }
+
+    // .then((user) => {
+    //   if (user === null) {
+    //     this.setState(() => {
+    //       return { errors: [ 'Sign-in was unsuccessful' ] }
+    //     })
+    //   } else {
+    //     this.props.history.push('/')
+    //   }
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    //   this.props.history.push('/error')
+    // })
+
+    // await axios.post('http://localhost:5000/api/courses', authCreds, course )
+      // .then(() => {
+      //   console.log('This course has been created!')
         
-        this.props.history.push('/');
-      });
+      //   this.props.history.push('/');
+    //   });
     // .then(errors => {
     //   if (errors.length) {
     //     this.setState({ errors });
     //   } else {
         
-  }
+    // }
     
   
     //  .catch((error) => {
@@ -163,7 +188,6 @@ export default class CreateCourse extends Component {
     //     this.props.history.push('/')
     //   })
   
-
   cancel = (e) => {
     e.preventDefault()
     this.props.history.push('/')

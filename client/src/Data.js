@@ -6,7 +6,7 @@ const apiBaseUrl = 'http://localhost:5000/api'
 // Make api function authorization header specific (remove other portions) and then pass into
 // axios.post (etc.) requests where needed
 export default class Data {
-  api (path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
+  api (path, method, body = null, requiresAuth = false, credentials = null) {
     const url = apiBaseUrl + path
 
     const options = {
@@ -63,8 +63,8 @@ export default class Data {
   // }
 
   // TBD
-  async createCourse (course, emailAdress, password) {
-    const response = await this.api('/courses', 'POST', course)
+  async createCourse (course, emailAddress, password) {
+    const response = await this.api('/courses', 'POST', course, true, { emailAddress, password })
     if (response.status === 201) {
       return []
     } else if (response.status === 400) {

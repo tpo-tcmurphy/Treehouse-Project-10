@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export default class UserSignIn extends Component {
   state = {
@@ -24,7 +25,7 @@ export default class UserSignIn extends Component {
               <input id='password' name='password' type='password' value={password} onChange={this.change} />
               <button className='button' type='submit'>Sign In</button><button className='button button-secondary' onClick={this.cancel}>Cancel</button>
           </form>
-          <p>Don't have a user account? Click here to <a href='sign-up.html'>sign up</a>!</p>
+          <p>Don't have a user account? Click here to <Link to='/signup'>sign up</Link>!</p>
       </div>
       </main>
     )

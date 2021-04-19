@@ -18,7 +18,7 @@ function Courses () {
 
   const courses = dataState.map((data, index) => {
     return (
-      <Link className='course--module course--link' key={JSON.stringify(data.id)} to={'/courses/' + JSON.stringify(data.id)}>
+      <Link className='course--module course--link' key={data.id} to={`/courses/${data.id}`}>
         <h2 className='course--label'>Course</h2>
         <h3 className='course--title'>{JSON.stringify(data.title)}</h3>
       </Link>
@@ -26,17 +26,17 @@ function Courses () {
   })
 
   return (
-    <main>
-      <div className='wrap main--grid'>
-        {courses}
-        <a className='course--module course--add--module' href='create-course.html' />
+    <div className='wrap main--grid'>
+      {courses}
+      <Link className='course--module course--add--module' to='/courses/create'>
         <span className='course--add--title'>
-          <svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 13 13' className='add'>
-            <polygon points='7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 ' />
-          </svg>New Course
+          <svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0px' y='0px'
+          viewBox='0 0 13 13' className='add'><polygon points='7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 '></polygon></svg>
+          New Course
         </span>
-      </div>
-    </main>
+      </Link>
+
+    </div>
   )
 }
 

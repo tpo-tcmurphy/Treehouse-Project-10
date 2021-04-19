@@ -25,27 +25,29 @@ export default class UserSignUp extends Component {
   submit = async (e) => {
     e.preventDefault()
     const { context }  = this.props
-    const {firstName, lastName, emailAddress, password } = this.state
+    const {firstName, lastName, emailAddress, password, userId } = this.state
     
     const user = {
       firstName,
       lastName,
       emailAddress,
-      password
+      password,
+      userId
     };
     console.log(user)
     // Move below function to Data file?????
     await axios.post('http://localhost:5000/api/users', { firstName, lastName, emailAddress, password })
+    context.actions.signIn(emailAddress, password)
+          .then(() => {
+            console.log('This user has been created and is signed in!')
+            this.props.history.push('/');
+          });
     // .then(errors => {
     //   if (errors.length) {
     //     this.setState({ errors });
     //   } else {
-    //     context.actions.signIn(emailAddress, password)
-    //       .then(() => {
-    //         console.log('This user has been created and is signed in!')
-    //         this.props.history.push('/');
-    //       });
-      }
+        
+  }
     
   
     //  .catch((error) => {

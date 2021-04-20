@@ -9,15 +9,18 @@ export default class CreateCourse extends Component {
     courseDescription: '',
     estimatedTime: '',
     materialsNeeded: '',
-    userId: ''
+    userId: '',
+    errors: null
   }
   
   
   render() {
-  
+    const {errors} = this.state
+
     return (
       <div className="wrap">
       <h2>Create Course</h2>
+      <ul>{errors}</ul>
       <form onSubmit={this.submit}>
         <div className="main--flex">
             <div>
@@ -77,6 +80,11 @@ export default class CreateCourse extends Component {
         console.log('This course has been created!')
         this.props.history.push('/')
       })
+      .catch((error) =>{
+        const validationErrors = error.response.data.validationErrors
+        const validationErrorMessages = validationErrors.map((err, index) => <li key={index}>{err}</li>)
+        this.setState({errors: <p>{validationErrorMessages}</p>})
+      })       
     }
   
   cancel = (e) => {

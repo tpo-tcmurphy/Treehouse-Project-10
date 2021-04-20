@@ -1,4 +1,5 @@
 import axios from 'axios'
+import createConfig from './CreateConfig'
 
 // Make a config/baseURL file to import with below variable:
 const apiBaseUrl = 'http://localhost:5000/api'
@@ -62,34 +63,19 @@ export default class Data {
     // }
   // }
 
-  // // TBD
-  // async createCourse (course, emailAddress, password) {
-  //   console.log('DATA COURSE', course)
-  //   console.log('create course function called')
-  //   const response = await this.api('/courses', 'POST', course, true, { emailAddress, password })
-  //   if (response.status === 201) {
-  //     return []
-  //   } else if (response.status === 400) {
-  //     return response.json().then(data => {
-  //       return data.errors
-  //     })
-  //   } else {
-  //     throw new Error()
-  //   }
-  // }
+  // TBD
+  async createCourse (course, emailAddress, password) {
+    const config = createConfig(emailAddress, password, 'http://localhost:5000/api/courses', 'POST', course)
+    const response = await axios(config)
+    console.log(response.data)
+  }
 
   // TBD
   async updateCourse (courseId, course, emailAddress, password) {
-    const response = await this.api('/courses/' + courseId, 'PUT', course, true, { emailAddress, password })
-    if (response.status === 204) {
-      return []
-    } else if (response.status === 400) {
-      return response.json().then(data => {
-        return data.errors
-      })
-    } else {
-      throw new Error()
-    }
+    const url = 'http://localhost:5000/api/courses/' + courseId
+    const config = createConfig(emailAddress, password, url, 'PUT', course)
+    const response = await axios(config)
+    console.log(response.data)
   }
 
   // TBD

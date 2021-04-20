@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom'
 function CourseDetail (props) {
   const params = useParams()
   const id = params.id
+  console.log(id)
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
 
@@ -14,15 +15,16 @@ function CourseDetail (props) {
     axios(`http://localhost:5000/api/courses/${id}`)
       .then((response) => {
         setDataState(response.data)
+        console.log(dataState)
         setUser(`${response.data.User.firstName} ${response.data.User.lastName}`)
       })
-  }, [id])
+  }, [])
 
   return (
     <main>
       <div className='actions--bar'>
         <div className='wrap'>
-          <a className='button' href='update-course.html'>Update Course</a>
+          <Link className='button' props={dataState.id} to={'/courses/' + dataState.id + '/update'}>Update Course</Link>
           <a className='button' href='#'>Delete Course</a>
           <Link className='button button-secondary' to='/'>Return to List</Link>
         </div>

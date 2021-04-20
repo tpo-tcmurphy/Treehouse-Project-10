@@ -1,4 +1,5 @@
 import axios from 'axios'
+import createConfig from './CreateConfig'
 
 // Make a config/baseURL file to import with below variable:
 const apiBaseUrl = 'http://localhost:5000/api'
@@ -64,12 +65,6 @@ export default class Data {
 
   // TBD
   async createCourse (course, emailAddress, password) {
-    function createConfig (username, password, url, method, data) {
-      const token = `${username}:${password}`
-      const encodedToken = Buffer.from(token).toString('base64')
-      return { method, url, data, headers: { 'Authorization': 'Basic ' + encodedToken } }
-    }
-
     const config = createConfig(emailAddress, password, 'http://localhost:5000/api/courses', 'POST', course)
     const response = await axios(config)
     console.log(response.data)

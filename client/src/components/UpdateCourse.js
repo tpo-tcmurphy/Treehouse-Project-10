@@ -1,7 +1,7 @@
 import React, { Component, useState, useRef, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
-
+import ReactMarkdown from 'react-markdown'
 
 function UpdateCourse (props) {
   // const params = useParams()
@@ -71,17 +71,17 @@ function UpdateCourse (props) {
             <input id='courseTitle' name='courseTitle' type='text' onChange={change} value={dataState.title} />
 
             <label htmlFor='courseAuthor'>Course Author</label>
-            <input id='courseAuthor' name='courseAuthor' type='text' readOnly value='{userField}' />
+            <input id='courseAuthor' name='courseAuthor' type='text' readOnly value={user} />
 
             <label htmlFor='courseDescription'>Course Description</label>
-            <textarea id='courseDescription' name='courseDescription' onChange={change}>{dataState.description}</textarea>
+            <textarea id='courseDescription' name='courseDescription' value={dataState.description} onChange={change}> </textarea>
           </div>
           <div>
             <label htmlFor='estimatedTime'>Estimated Time</label>
             <input id='estimatedTime' name='estimatedTime' type='text' value={dataState.estimatedTime} />
 
             <label htmlFor='materialsNeeded'>Materials Needed</label>
-            <textarea id='materialsNeeded' name='materialsNeeded' onChange={change}>{dataState.materialsNeeded}</textarea>
+            <textarea id='materialsNeeded' name='materialsNeeded' value={dataState.materialsNeeded} onChange={change}> </textarea>
           </div>
         </div>
         <button className='button' type='submit'>Update Course</button><button className='button button-secondary' onClick={cancel}>Cancel</button>

@@ -72,9 +72,34 @@ import axios from 'axios'
 // }
 
 // export default CreateCourse
+const apiBaseUrl = 'http://localhost:5000/api'
 
 
 export default class CreateCourse extends Component {
+
+  api (path, method, body = null, requiresAuth = false, credentials = null) {
+
+    const url = apiBaseUrl + path
+
+    const options = {
+      method,
+      // Might still need headers?
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      }
+    }
+
+    if (body !== null) {
+      options.body = JSON.stringify(body)
+    }
+
+    // Keep this!
+    if (requiresAuth) {
+      const encodedCredentials = Buffer.from(`${credentials.emailAddress}:${credentials.password}`).toString('base64')
+      options.headers.Authorization = `Basic ${encodedCredentials}`
+    }
+    return axios(url, options)
+  }
   
   state = {
     courseTitle: '',
@@ -123,10 +148,11 @@ export default class CreateCourse extends Component {
     })
   }
 
+
   submit = async (e) => {
     e.preventDefault()
     const { context }  = this.props
-    const {courseTitle, courseDescription, estimatedTime, materialsNeeded, userId} = this.state
+    const {courseTitle, courseDescription, estimatedTime, materialsNeeded} = this.state
     const authUser = context.authenticatedUser
 
     const course = {
@@ -134,25 +160,34 @@ export default class CreateCourse extends Component {
       courseDescription,
       estimatedTime,
       materialsNeeded,
-      userId
+      userId: authUser.data.userId
     }
 
     const authCreds = {
       emailAddress: authUser.data.emailAddress,
       password: authUser.password,
-      userId: authUser.userId
+      userId: authUser.data.userId
+    }
+    
+    // Move below function to Data file?????
+    console.log('DATA COURSE', course)
+    console.log('create course function called')
+    const response = await this.api('/courses', 'POST', course, true, authCreds.emailAddress, authCreds.password )
+    if (response.status === 201) {
+      console.log('This course has been created!')
+      this.props.history.push('/')
+      return []
+    } else if (response.status === 400) {
+      return response.json().then(data => {
+        return data.errors
+      })}
+     else {
+      throw new Error()
     }
 
-    console.log(course)
-    
-    console.log(authUser.data.emailAddress, authUser.password)
-    // Move below function to Data file?????
-
-    context.data.createCourse(course, authCreds.emailAddress, authCreds.password)
-    .then(() => {
-      console.log('This course has been created!')
-      
-      this.props.history.push('/')})
+    // createCourse(course, authCreds.emailAddress, authCreds.password)
+    // .then(() => {
+    //   console.log('This course has been created!')
     }
 
     // .then((user) => {
@@ -193,5 +228,9 @@ export default class CreateCourse extends Component {
     this.props.history.push('/')
   }
 
+
   
 }
+
+
+

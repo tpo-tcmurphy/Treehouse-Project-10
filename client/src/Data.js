@@ -62,19 +62,21 @@ export default class Data {
     // }
   // }
 
-  // TBD
-  async createCourse (course, emailAddress, password) {
-    const response = await this.api('/courses', 'POST', course, true, { emailAddress, password })
-    if (response.status === 201) {
-      return []
-    } else if (response.status === 400) {
-      return response.json().then(data => {
-        return data.errors
-      })
-    } else {
-      throw new Error()
-    }
-  }
+  // // TBD
+  // async createCourse (course, emailAddress, password) {
+  //   console.log('DATA COURSE', course)
+  //   console.log('create course function called')
+  //   const response = await this.api('/courses', 'POST', course, true, { emailAddress, password })
+  //   if (response.status === 201) {
+  //     return []
+  //   } else if (response.status === 400) {
+  //     return response.json().then(data => {
+  //       return data.errors
+  //     })
+  //   } else {
+  //     throw new Error()
+  //   }
+  // }
 
   // TBD
   async updateCourse (courseId, course, emailAddress, password) {

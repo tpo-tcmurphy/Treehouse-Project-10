@@ -4,7 +4,9 @@ import '../styles/index.css'
 import ReactMarkdown from 'react-markdown'
 import { Link, useParams } from 'react-router-dom'
 
-function CourseDetail (props) {
+function CourseDetail(props) {
+  const { context } = props
+  const authUser = context.authenticatedUser
   const params = useParams()
   const id = params.id
   console.log(id)
@@ -21,8 +23,6 @@ function CourseDetail (props) {
 
   const handleDelete = (e) => {
     e.preventDefault()
-    const { context } = props
-    const authUser = context.authenticatedUser
     context.data.deleteCourse(id, authUser.data.emailAddress, authUser.password)
       .then(() => {
         props.history.push('/')
@@ -33,8 +33,14 @@ function CourseDetail (props) {
     <main>
       <div className='actions--bar'>
         <div className='wrap'>
-          <Link className='button' props={dataState.id} to={'/courses/' + dataState.id + '/update'}>Update Course</Link>
-          <Link className='button' onClick={handleDelete} to='/'>Delete Course</Link>
+          {
+            authUser && dataState.User && authUser.data.emailAddress === dataState.User.emailAddress ?
+              <>
+                <Link className='button' props={dataState.id} to={'/courses/' + dataState.id + '/update'}>Update Course</Link>
+                <Link className='button' onClick={handleDelete} to='/'>Delete Course</Link>
+              </>
+              : false
+          }
           <Link className='button button-secondary' to='/'>Return to List</Link>
         </div>
       </div>

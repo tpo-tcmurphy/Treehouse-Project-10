@@ -38,8 +38,8 @@ function App () {
         <HeaderWithContext />
         <Switch>
           <Route exact path='/' render={() => <Courses />} />
-          <Route path='/courses/create' component={CreateCourseWithContext} />
-          <Route path='/courses/:id/update' component={UpdateCourseWithContext} />
+          <PrivateRoute path='/courses/create' component={CreateCourseWithContext} />
+          <PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext} />
           <Route exact path='/courses/:id' component={CourseDetailWithContext} />
           <Route path='/signin' component={UserSignInWithContext} />
           <Route path='/signout' component={UserSignOutWithContext} />

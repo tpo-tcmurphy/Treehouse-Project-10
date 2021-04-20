@@ -45,6 +45,9 @@ module.exports = (sequelize) => {
         this.setDataValue('password', hashedPassword)
       },
       validate: {
+        notNull: {
+          msg: 'A password is required'
+        },
         notEmpty: {
           msg: 'A password is required'
         }

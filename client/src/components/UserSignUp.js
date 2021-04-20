@@ -9,6 +9,7 @@ export default class UserSignUp extends Component {
     lastName: '',
     emailAddress: '',
     password: null,
+    errors: null
   }
   
   change = (event) => {
@@ -35,34 +36,33 @@ export default class UserSignUp extends Component {
       userId
     }
     // Move below function to Data file?????
-    await axios.post('http://localhost:5000/api/users', { firstName, lastName, emailAddress, password })
-    context.actions.signIn(emailAddress, password)
-          .then(() => {
-            console.log('This user has been created and is signed in!')
-            this.props.history.push('/');
-          })
-    // .then(errors => {
-    //   if (errors.length) {
-    //     this.setState({ errors });
-    //   } else {
-        
-  }
-    
-  
-    //  .catch((error) => {
-    //    console.error(error);
-    //     this.props.history.push('/')
-    //   })
-  
+    try {
+      let pass
+      if (password == null) {
+        pass = ''
+      } else {
+        pass = password
+      }
+      await axios.post('http://localhost:5000/api/users', { firstName, lastName, emailAddress, pass })
+      context.actions.signIn(emailAddress, password)
+      console.log('This user has been created and is signed in!')
+      this.props.history.push('/');
+    } catch (error) {
+      const validationErrors = error.response.data.validationErrors
+      const validationErrorMessages = validationErrors.map((err, index) => <li key={index}>{err}</li>)
+      this.setState({errors: <p>{validationErrorMessages}</p>})
+    }
+  }  
 
   cancel = (e) => {
     e.preventDefault()
     this.props.history.push('/')
   }
   render() {
-  
+    const {errors} = this.state
     return (
-      <div className='form--centered'> 
+      <div className='form--centered'>
+      <ul>{errors}</ul>
       <form onSubmit={this.submit}>
       <label htmlFor="firstName">First Name</label>
       <input id="firstName" name="firstName" type="text" onChange={this.change} />

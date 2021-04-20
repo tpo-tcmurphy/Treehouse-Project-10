@@ -56,6 +56,7 @@ function UpdateCourse (props) {
     e.preventDefault()
     this.props.history.push('/')
   }
+
   return (
     <div className='wrap'>
       <h2>Update Course</h2>

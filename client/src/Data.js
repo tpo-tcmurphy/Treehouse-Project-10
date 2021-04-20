@@ -80,11 +80,9 @@ export default class Data {
 
   // TBD
   async deleteCourse (courseId, emailAddress, password) {
-    const response = await this.api('/courses/' + courseId, 'DELETE', null, true, { emailAddress, password })
-    if (response.status === 204) {
-      return []
-    } else {
-      throw new Error()
-    }
+    const url = 'http://localhost:5000/api/courses/' + courseId
+    const config = createConfig(emailAddress, password, url, 'DELETE')
+    const response = await axios(config)
+    console.log(response.data)
   }
 }

@@ -15,17 +15,26 @@ function CourseDetail (props) {
     axios(`http://localhost:5000/api/courses/${id}`)
       .then((response) => {
         setDataState(response.data)
-        console.log(dataState)
         setUser(`${response.data.User.firstName} ${response.data.User.lastName}`)
       })
   }, [])
+
+  const handleDelete = (e) => {
+    e.preventDefault()
+    const { context } = props
+    const authUser = context.authenticatedUser
+    context.data.deleteCourse(id, authUser.data.emailAddress, authUser.password)
+      .then(() => {
+        props.history.push('/')
+      })
+  }
 
   return (
     <main>
       <div className='actions--bar'>
         <div className='wrap'>
           <Link className='button' props={dataState.id} to={'/courses/' + dataState.id + '/update'}>Update Course</Link>
-          <a className='button' href='#'>Delete Course</a>
+          <Link className='button' onClick={handleDelete} to='/'>Delete Course</Link>
           <Link className='button button-secondary' to='/'>Return to List</Link>
         </div>
       </div>

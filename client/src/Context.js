@@ -35,10 +35,6 @@ export class Provider extends Component {
     Cookies.remove('authenticatedUser')
   }
 
-  testFunction = () => {
-    console.log('test function working wtf')
-  }
-
   render() {
     const { authenticatedUser } = this.state
 

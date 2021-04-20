@@ -19,6 +19,7 @@ import UserSignIn from './UserSignIn'
 import UserSignOut from './UserSignOut'
 import UserSignUp from './UserSignUp'
 import CreateCourse from './CreateCourse'
+import UpdateCourse from './UpdateCourse'
 // Components with Context
 import withContext from '../Context'
 const HeaderWithContext = withContext(Header)
@@ -27,6 +28,7 @@ const UserSignInWithContext = withContext(UserSignIn)
 const UserSignOutWithContext = withContext(UserSignOut)
 const UserSignUpWithContext = withContext(UserSignUp)
 const CreateCourseWithContext = withContext(CreateCourse)
+const UpdateCourseWithContext = withContext(UpdateCourse)
 // NOTE: reset.css is being imported in index.html - remove if not needed (clashes with index.css??)
 
 function App () {
@@ -37,6 +39,7 @@ function App () {
         <Switch>
           <Route exact path='/' render={() => <Courses />} />
           <Route path='/courses/create' component={CreateCourseWithContext} />
+          <Route path='/courses/:id/update' component={UpdateCourseWithContext} />
           <Route exact path='/courses/:id' component={CourseDetailWithContext} />
           <Route path='/signin' component={UserSignInWithContext} />
           <Route path='/signout' component={UserSignOutWithContext} />

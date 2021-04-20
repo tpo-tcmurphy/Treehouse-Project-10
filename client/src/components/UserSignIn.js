@@ -17,6 +17,7 @@ export default class UserSignIn extends Component {
     return (
       <main>
       <div className='form--centered'>
+          <h3>{errors}</h3>
           <h2>Sign In</h2>
           <form onSubmit={this.submit}>
               <label htmlFor='emailAddress'>Email Address</label>
@@ -58,8 +59,8 @@ export default class UserSignIn extends Component {
         }
       })
       .catch((error) => {
-        console.error(error);
-        this.props.history.push('/error')
+        this.setState({errors: [ 'Sign-in was unsuccessful' ]})
+        // this.props.history.push('/error')
       })
   }
 

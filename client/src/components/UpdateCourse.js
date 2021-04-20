@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown'
 function UpdateCourse (props) {
   // const params = useParams()
   const id = props.match.params.id
-  const [dataState, setDataState] = useState('')
+  const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
 
   useEffect(() => {
@@ -22,11 +22,7 @@ function UpdateCourse (props) {
     const name = event.target.name
     const value = event.target.value
 
-    setDataState(() => {
-      return {
-        [name]: value
-      }
-    })
+    setDataState({...dataState, [name]: value})
   }
 
 
@@ -37,11 +33,11 @@ function UpdateCourse (props) {
     
 
     const course = {
-      id: setDataState.id,
-      title: setDataState.title,
-      description: setDataState.description,
-      estimatedTime: setDataState.estimatedTime,
-      materialsNeeded: setDataState.materialsNeeded
+      id: dataState.id,
+      title: dataState.title,
+      description: dataState.description,
+      estimatedTime: dataState.estimatedTime,
+      materialsNeeded: dataState.materialsNeeded
     }
 
     const authCreds = {
@@ -67,20 +63,20 @@ function UpdateCourse (props) {
         <div className='main--flex'>
           <div>
             <label htmlFor='courseTitle'>Course Title</label>
-            <input id='courseTitle' name='courseTitle' type='text' onChange={change} value={dataState.title || ''} />
+            <input id='courseTitle' name='title' type='text' onChange={change} value={dataState.title || ''} />
 
             <label htmlFor='courseAuthor'>Course Author</label>
             <input id='courseAuthor' name='courseAuthor' type='text' readOnly value={user || ''} />
 
             <label htmlFor='courseDescription'>Course Description</label>
-            <textarea id='courseDescription' name='courseDescription' value={dataState.description || ''} onChange={change} />
+            <textarea id='courseDescription' name='description' onChange={change} value={dataState.description || ''} />
           </div>
           <div>
             <label htmlFor='estimatedTime'>Estimated Time</label>
-            <input id='estimatedTime' name='estimatedTime' type='text' value={dataState.estimatedTime || ''} onChange={change} />
+            <input id='estimatedTime' name='estimatedTime' type='text' onChange={change} value={dataState.estimatedTime || ''} />
 
             <label htmlFor='materialsNeeded'>Materials Needed</label>
-            <textarea id='materialsNeeded' name='materialsNeeded' value={dataState.materialsNeeded || ''} onChange={change} /> 
+            <textarea id='materialsNeeded' name='materialsNeeded' onChange={change} value={dataState.materialsNeeded || ''} /> 
           </div>
         </div>
         <button className='button' type='submit'>Update Course</button><button className='button button-secondary' onClick={cancel}>Cancel</button>

@@ -8,6 +8,7 @@ function UpdateCourse (props) {
   const id = props.match.params.id
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
+  const [error, setError] = useState('')
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/courses/${id}`)
@@ -49,6 +50,11 @@ function UpdateCourse (props) {
         console.log('This course has been updated!')
         // this.props.history.push(`/courses/${id}`)
       })
+      .catch((error) => {
+        const validationErrors = error.response.data.validationErrors
+        const validationErrorMessages = validationErrors.map((err, index) => <li key={index}>{err}</li>)
+        setError(<p>{validationErrorMessages}</p>)
+      })
   }
 
   const cancel = (e) => {
@@ -59,6 +65,7 @@ function UpdateCourse (props) {
   return (
     <div className='wrap'>
       <h2>Update Course</h2>
+      <ul>{error}</ul>
       <form onSubmit={submit}>
         <div className='main--flex'>
           <div>

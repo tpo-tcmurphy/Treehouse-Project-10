@@ -32,7 +32,6 @@ export default class Data {
 
   // This is being used
   async getUser (emailAddress, password) {
-    console.log(emailAddress, password)
     const response = await this.api('/users', 'GET', null, true, { emailAddress, password })
     if (response.status === 200) {
       return response
@@ -43,31 +42,10 @@ export default class Data {
     }
   }
 
-  // This is NOT being used
-  // async createUser (user) {
-  //   console.log('createUserCalled')
-  //   console.log(user)
-  //   const response = await this.api('/users', 'POST', user, false, null)
-  //   console.log('API Response Ran')
-  //   return response
-    // if (response.status === 201) {
-    //   return []
-    // } else if (response.status === 400) {
-    //   console.log('responseStatus 400')
-    //   return response.json().then(data => {
-    //     return data.errors
-    //   })
-    // } else {
-    //   console.log('error thrown')
-    //   throw new Error()
-    // }
-  // }
-
   // TBD
   async createCourse (course, emailAddress, password) {
     const config = createConfig(emailAddress, password, 'http://localhost:5000/api/courses', 'POST', course)
     const response = await axios(config)
-    console.log(response.data)
   }
 
   // TBD
@@ -75,7 +53,6 @@ export default class Data {
     const url = 'http://localhost:5000/api/courses/' + courseId
     const config = createConfig(emailAddress, password, url, 'PUT', course)
     const response = await axios(config)
-    console.log(response.data)
   }
 
   // TBD
@@ -83,6 +60,5 @@ export default class Data {
     const url = 'http://localhost:5000/api/courses/' + courseId
     const config = createConfig(emailAddress, password, url, 'DELETE')
     const response = await axios(config)
-    console.log(response.data)
   }
 }

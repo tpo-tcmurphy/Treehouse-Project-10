@@ -9,7 +9,6 @@ function CourseDetail(props) {
   const authUser = context.authenticatedUser
   const params = useParams()
   const id = params.id
-  console.log(id)
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
 

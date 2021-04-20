@@ -10,7 +10,6 @@ function UpdateCourse (props) {
   const [user, setUser] = useState('')
 
   useEffect(() => {
-    console.log(id)
     axios.get(`http://localhost:5000/api/courses/${id}`)
       .then((response) => {
         setDataState(response.data)
@@ -48,7 +47,7 @@ function UpdateCourse (props) {
     context.data.updateCourse(id, course, authCreds.emailAddress, authCreds.password)
       .then(() => {
         console.log('This course has been updated!')
-        //this.props.history.push(`/courses/${id}`)
+        // this.props.history.push(`/courses/${id}`)
       })
   }
 

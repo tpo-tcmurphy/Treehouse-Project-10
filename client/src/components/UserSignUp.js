@@ -33,15 +33,14 @@ export default class UserSignUp extends Component {
       emailAddress,
       password,
       userId
-    };
-    console.log(user)
+    }
     // Move below function to Data file?????
     await axios.post('http://localhost:5000/api/users', { firstName, lastName, emailAddress, password })
     context.actions.signIn(emailAddress, password)
           .then(() => {
             console.log('This user has been created and is signed in!')
             this.props.history.push('/');
-          });
+          })
     // .then(errors => {
     //   if (errors.length) {
     //     this.setState({ errors });

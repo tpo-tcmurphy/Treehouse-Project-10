@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 const Header = (props) => {
   const { context } = props
   const authUser = context.authenticatedUser
-  console.log(authUser)
   return (
     <header>
       <div className='wrap header--flex'>

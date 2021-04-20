@@ -72,7 +72,7 @@ export default class Data {
 
   // TBD
   async updateCourse (courseId, course, emailAddress, password) {
-    const url = 'http://localhost:5000/api/courses/' + courseId + '/update'
+    const url = 'http://localhost:5000/api/courses/' + courseId
     const config = createConfig(emailAddress, password, url, 'PUT', course)
     const response = await axios(config)
     console.log(response.data)

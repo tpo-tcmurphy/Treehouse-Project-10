@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown'
 function UpdateCourse (props) {
   // const params = useParams()
   const id = props.match.params.id
-  const [dataState, setDataState] = useState([])
+  const [dataState, setDataState] = useState('')
   const [user, setUser] = useState('')
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function UpdateCourse (props) {
     const name = event.target.name
     const value = event.target.value
 
-    this.setState(() => {
+    setDataState(() => {
       return {
         [name]: value
       }
@@ -31,30 +31,29 @@ function UpdateCourse (props) {
 
 
   const submit = async (e) => {
-    // e.preventDefault()
-    // const { context } = this.props
-    // const authUser = context.authenticatedUser
+    e.preventDefault()
+    const { context } = props
+    const authUser = context.authenticatedUser
     
 
-    // const course = {
-    //   id,
-    //   title,
-    //   description,
-    //   estimatedTime: time,
-    //   materialsNeeded: materials
-    // }
+    const course = {
+      id: setDataState.id,
+      title: setDataState.title,
+      description: setDataState.description,
+      estimatedTime: setDataState.estimatedTime,
+      materialsNeeded: setDataState.materialsNeeded
+    }
 
-    // const authCreds = {
-    //   emailAddress: authUser.data.emailAddress,
-    //   password: authUser.password
-    // }
+    const authCreds = {
+      emailAddress: authUser.data.emailAddress,
+      password: authUser.password
+    }
 
-    // Move below function to Data file?????
-    // context.data.updateCourse(id, course, authCreds.emailAddress, authCreds.password)
-    //   .then(() => {
-    //     console.log('This course has been updated!')
-    //     this.props.history.push(`/courses/${id}`)
-    //   })
+    context.data.updateCourse(id, course, authCreds.emailAddress, authCreds.password)
+      .then(() => {
+        console.log('This course has been updated!')
+        //this.props.history.push(`/courses/${id}`)
+      })
   }
 
   const cancel = (e) => {
@@ -68,20 +67,20 @@ function UpdateCourse (props) {
         <div className='main--flex'>
           <div>
             <label htmlFor='courseTitle'>Course Title</label>
-            <input id='courseTitle' name='courseTitle' type='text' onChange={change} value={dataState.title} />
+            <input id='courseTitle' name='courseTitle' type='text' onChange={change} value={dataState.title || ''} />
 
             <label htmlFor='courseAuthor'>Course Author</label>
-            <input id='courseAuthor' name='courseAuthor' type='text' readOnly value={user} />
+            <input id='courseAuthor' name='courseAuthor' type='text' readOnly value={user || ''} />
 
             <label htmlFor='courseDescription'>Course Description</label>
-            <textarea id='courseDescription' name='courseDescription' value={dataState.description} onChange={change}> </textarea>
+            <textarea id='courseDescription' name='courseDescription' value={dataState.description || ''} onChange={change} />
           </div>
           <div>
             <label htmlFor='estimatedTime'>Estimated Time</label>
-            <input id='estimatedTime' name='estimatedTime' type='text' value={dataState.estimatedTime} />
+            <input id='estimatedTime' name='estimatedTime' type='text' value={dataState.estimatedTime || ''} onChange={change} />
 
             <label htmlFor='materialsNeeded'>Materials Needed</label>
-            <textarea id='materialsNeeded' name='materialsNeeded' value={dataState.materialsNeeded} onChange={change}> </textarea>
+            <textarea id='materialsNeeded' name='materialsNeeded' value={dataState.materialsNeeded || ''} onChange={change} /> 
           </div>
         </div>
         <button className='button' type='submit'>Update Course</button><button className='button button-secondary' onClick={cancel}>Cancel</button>

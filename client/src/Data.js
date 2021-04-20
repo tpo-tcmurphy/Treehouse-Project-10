@@ -62,21 +62,18 @@ export default class Data {
     // }
   // }
 
-  // // TBD
-  // async createCourse (course, emailAddress, password) {
-  //   console.log('DATA COURSE', course)
-  //   console.log('create course function called')
-  //   const response = await this.api('/courses', 'POST', course, true, { emailAddress, password })
-  //   if (response.status === 201) {
-  //     return []
-  //   } else if (response.status === 400) {
-  //     return response.json().then(data => {
-  //       return data.errors
-  //     })
-  //   } else {
-  //     throw new Error()
-  //   }
-  // }
+  // TBD
+  async createCourse (course, emailAddress, password) {
+    function createConfig (username, password, url, method, data) {
+      const token = `${username}:${password}`
+      const encodedToken = Buffer.from(token).toString('base64')
+      return { method, url, data, headers: { 'Authorization': 'Basic ' + encodedToken } }
+    }
+
+    const config = createConfig(emailAddress, password, 'http://localhost:5000/api/courses', 'POST', course)
+    const response = await axios(config)
+    console.log(response.data)
+  }
 
   // TBD
   async updateCourse (courseId, course, emailAddress, password) {

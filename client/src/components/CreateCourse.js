@@ -156,8 +156,8 @@ export default class CreateCourse extends Component {
     const authUser = context.authenticatedUser
 
     const course = {
-      courseTitle,
-      courseDescription,
+      title: courseTitle,
+      description: courseDescription,
       estimatedTime,
       materialsNeeded,
       userId: authUser.data.userId
@@ -165,25 +165,15 @@ export default class CreateCourse extends Component {
 
     const authCreds = {
       emailAddress: authUser.data.emailAddress,
-      password: authUser.password,
-      userId: authUser.data.userId
+      password: authUser.password
     }
     
     // Move below function to Data file?????
-    console.log('DATA COURSE', course)
-    console.log('create course function called')
-    const response = await this.api('/courses', 'POST', course, true, authCreds.emailAddress, authCreds.password )
-    if (response.status === 201) {
-      console.log('This course has been created!')
-      this.props.history.push('/')
-      return []
-    } else if (response.status === 400) {
-      return response.json().then(data => {
-        return data.errors
-      })}
-     else {
-      throw new Error()
-    }
+    context.data.createCourse(course, authCreds.emailAddress, authCreds.password)
+      .then(() => {
+        console.log('This course has been created!')
+        this.props.history.push('/')
+      })
 
     // createCourse(course, authCreds.emailAddress, authCreds.password)
     // .then(() => {

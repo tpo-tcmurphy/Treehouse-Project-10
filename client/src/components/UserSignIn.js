@@ -25,7 +25,7 @@ export default class UserSignIn extends Component {
               <input id='emailAddress' name='emailAddress' type='email' value={emailAddress} onChange={this.change} />
               <label htmlFor='password'>Password</label>
               <input id='password' name='password' type='password' value={password} onChange={this.change} />
-              <button className='button' type='submit'>Sign In</button><button className='button button-secondary' onClick={this.cancel}>Cancel</button>
+              <button className='button' type='submit'>Sign In</button><button className='button button-secondary' onClick={this.cancel} type='button'>Cancel</button>
           </form>
           <p>Don't have a user account? Click here to <Link to='/signup'>sign up</Link>!</p>
       </div>

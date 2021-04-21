@@ -40,7 +40,6 @@ function Courses (props) {
           New Course
         </span>
       </Link>
-
     </div>
   )
 }

@@ -4,10 +4,21 @@ import '../styles/index.css'
 import ReactMarkdown from 'react-markdown'
 import { Link, useParams } from 'react-router-dom'
 
+/**
+ * Gets authenticated user from context
+ * Renders course details based off course in URL
+ * Shows update/delete buttons if owner of course is current user
+ * handleDelete function handles course deletion
+ * @param {*} props
+ */
 function CourseDetail (props) {
+  // Current authenticated user
   const { context } = props
   const authUser = context.authenticatedUser
+
+  // ID from URL
   const { id } = useParams()
+
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
 
@@ -15,6 +26,7 @@ function CourseDetail (props) {
     axios(`http://localhost:5000/api/courses/${id}`)
       .then((response) => {
         setDataState(response.data)
+        // Sets user so course owner displays on page
         setUser(`${response.data.User.firstName} ${response.data.User.lastName}`)
       })
       .catch((error) => {
@@ -26,8 +38,12 @@ function CourseDetail (props) {
       })
   }, [id, props.history])
 
-  const handleDelete = (e) => {
-    e.preventDefault()
+  /**
+   * Deletes course on click
+   * @param {*} event
+   */
+  const handleDelete = (event) => {
+    event.preventDefault()
     context.data.deleteCourse(id, authUser.data.emailAddress, authUser.password)
       .then(() => {
         props.history.push('/')

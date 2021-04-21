@@ -7,6 +7,11 @@ import {
 
 import '../styles/index.css'
 
+// Error Messages
+import Forbidden from './Forbidden'
+import NotFound from './NotFound'
+import UnhandledError from './UnhandledError'
+
 // Components
 import Header from './Header'
 import PrivateRoute from '../PrivateRoute'
@@ -18,11 +23,6 @@ import UserSignUp from './UserSignUp'
 import CreateCourse from './CreateCourse'
 import UpdateCourse from './UpdateCourse'
 
-// Error Messages
-import Forbidden from './Forbidden'
-import NotFound from './NotFound'
-import UnhandledError from './UnhandledError'
-
 // Components with Context
 import withContext from '../Context'
 const HeaderWithContext = withContext(Header)
@@ -33,6 +33,7 @@ const UserSignUpWithContext = withContext(UserSignUp)
 const CreateCourseWithContext = withContext(CreateCourse)
 const UpdateCourseWithContext = withContext(UpdateCourse)
 
+// Routes
 function App () {
   return (
     <div className='App'>

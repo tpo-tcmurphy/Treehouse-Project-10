@@ -4,11 +4,10 @@ import '../styles/index.css'
 import ReactMarkdown from 'react-markdown'
 import { Link, useParams } from 'react-router-dom'
 
-function CourseDetail(props) {
+function CourseDetail (props) {
   const { context } = props
   const authUser = context.authenticatedUser
-  const params = useParams()
-  const id = params.id
+  const { id } = useParams()
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
 
@@ -18,7 +17,7 @@ function CourseDetail(props) {
         setDataState(response.data)
         setUser(`${response.data.User.firstName} ${response.data.User.lastName}`)
       })
-  })
+  }, [id])
 
   const handleDelete = (e) => {
     e.preventDefault()

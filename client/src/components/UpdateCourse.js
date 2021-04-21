@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 function UpdateCourse (props) {
   // const params = useParams()
-  const id = props.match.params.id
+  const { id } = useParams()
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
   const [error, setError] = useState('')
@@ -44,7 +45,7 @@ function UpdateCourse (props) {
     context.data.updateCourse(id, course, authCreds.emailAddress, authCreds.password)
       .then(() => {
         console.log('This course has been updated!')
-        // this.props.history.push(`/courses/${id}`)
+        props.history.push(`/courses/${id}`)
       })
       .catch((error) => {
         const validationErrors = error.response.data.validationErrors
@@ -55,7 +56,7 @@ function UpdateCourse (props) {
 
   const cancel = (e) => {
     e.preventDefault()
-    this.props.history.push('/')
+    props.history.push('/')
   }
 
   return (

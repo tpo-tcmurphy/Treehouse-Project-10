@@ -18,6 +18,11 @@ import UserSignUp from './UserSignUp'
 import CreateCourse from './CreateCourse'
 import UpdateCourse from './UpdateCourse'
 
+// Error Messages
+import Forbidden from './Forbidden'
+import NotFound from './NotFound'
+import UnhandledError from './UnhandledError'
+
 // Components with Context
 import withContext from '../Context'
 const HeaderWithContext = withContext(Header)
@@ -41,6 +46,10 @@ function App () {
           <Route path='/signin' component={UserSignInWithContext} />
           <Route path='/signout' component={UserSignOutWithContext} />
           <Route path='/signup' component={UserSignUpWithContext} />
+          <Route path='/forbidden' component={Forbidden} />
+          <Route path='/notfound' component={NotFound} />
+          <Route path='/error' component={UnhandledError} />
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
     </div>

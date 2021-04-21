@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-function Courses () {
+function Courses (props) {
   const [dataState, setDataState] = useState([])
+  const history = useHistory()
 
   useEffect(() => {
     axios('http://localhost:5000/api/courses')
       .then(response => setDataState(response.data))
+      .catch((error) => {
+        if (error.status !== 500) {
+          history.push('/notfound')
+        } else {
+          history.push('/error')
+        }
+      })
     return () => {
       setDataState([])
     }
-  }, [])
+  }, [history])
 
   const courses = dataState.map((data, index) => {
     return (

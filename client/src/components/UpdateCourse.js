@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import Forbidden from './Forbidden'
 
 function UpdateCourse (props) {
-  // const params = useParams()
   const { id } = useParams()
   const [dataState, setDataState] = useState([])
   const [user, setUser] = useState('')
@@ -15,7 +15,22 @@ function UpdateCourse (props) {
         setDataState(response.data)
         setUser(`${response.data.User.firstName} ${response.data.User.lastName}`)
       })
-  }, [id])
+      .catch((error) => {
+        if (error.status !== 500) {
+          props.history.push('/notfound')
+        } else {
+          props.history.push('/error')
+        }
+      })
+  }, [id, props.history])
+
+  const { context } = props
+  const authUser = context.authenticatedUser
+  if (authUser && dataState.User && authUser.data.emailAddress !== dataState.User.emailAddress) {
+    return (
+      <Forbidden />
+    )
+  }
 
   const change = (event) => {
     const name = event.target.name

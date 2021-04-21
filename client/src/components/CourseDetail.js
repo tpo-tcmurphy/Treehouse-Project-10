@@ -17,7 +17,14 @@ function CourseDetail (props) {
         setDataState(response.data)
         setUser(`${response.data.User.firstName} ${response.data.User.lastName}`)
       })
-  }, [id])
+      .catch((error) => {
+        if (error.status !== 500) {
+          props.history.push('/notfound')
+        } else {
+          props.history.push('/error')
+        }
+      })
+  }, [id, props.history])
 
   const handleDelete = (e) => {
     e.preventDefault()

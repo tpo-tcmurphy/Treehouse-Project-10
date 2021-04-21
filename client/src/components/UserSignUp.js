@@ -18,20 +18,10 @@ export default class UserSignUp extends Component {
   change = (event) => {
     const name = event.target.name
     const value = event.target.value
-    this.setState(() => {
-      return {
-        [name]: value
-      }
-    })
-    if (name === 'password' || name === 'confirmPassword'){
-      const { password, confirmPassword  } = this.state
-      if (password === confirmPassword){
-        this.setState({errors: []}) 
-      } else {
-        this.setState({errors: ['passwords must match']}) 
-      }
-    }
+    const dict = {}
+    dict[name] = value
 
+    this.setState(dict)
   }
 
   submit = async (event) => {
@@ -49,20 +39,12 @@ export default class UserSignUp extends Component {
     
   
     try {
-      let pass
-      if (password == null) {
-        pass = ''
-      } else {
-        pass = password
-      }
-      await axios.post('http://localhost:5000/api/users', { firstName, lastName, emailAddress, pass })
+      await axios.post('http://localhost:5000/api/users', { firstName, lastName, emailAddress, password })
       context.actions.signIn(emailAddress, password)
       console.log('This user has been created and is signed in!')
       this.props.history.push('/');
     } catch (error) {
-      const validationErrors = error.response.data.validationErrors
-      const validationErrorMessages = validationErrors.map((err, index) => <li key={index}>{err}</li>)
-      this.setState({errors: <p>{validationErrorMessages}</p>})
+      this.setState({errors: error.response.data.validationErrors})
     }
   }  
 
@@ -71,7 +53,10 @@ export default class UserSignUp extends Component {
     this.props.history.push('/')
   }
   render() {
-    const {errors} = this.state
+    const errors = this.state.errors.map((message, index) => {
+      return <li key={index}>{message}</li>
+    })
+
     return (
       <div className='form--centered'>
       <ul>{errors}</ul>

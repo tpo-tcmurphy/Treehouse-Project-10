@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 
 // CONVERT TO HOOK
 export default class CreateCourse extends Component {

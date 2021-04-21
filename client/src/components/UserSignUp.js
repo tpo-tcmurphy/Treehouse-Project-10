@@ -10,34 +10,44 @@ export default class UserSignUp extends Component {
     firstName: '',
     lastName: '',
     emailAddress: '',
-    password: null,
-    errors: null
+    password: '',
+    confirmPassword: '',
+    errors: []
   }
   
   change = (event) => {
     const name = event.target.name
     const value = event.target.value
-
     this.setState(() => {
       return {
         [name]: value
       }
     })
+    if (name === 'password' || name === 'confirmPassword'){
+      const { password, confirmPassword  } = this.state
+      if (password === confirmPassword){
+        this.setState({errors: []}) 
+      } else {
+        this.setState({errors: ['passwords must match']}) 
+      }
+    }
+
   }
 
-  submit = async (e) => {
-    e.preventDefault()
+  submit = async (event) => {
+    event.preventDefault()
+
     const { context }  = this.props
-    const {firstName, lastName, emailAddress, password, userId } = this.state
-    
-    const user = {
-      firstName,
-      lastName,
-      emailAddress,
-      password,
-      userId
+    const {firstName, lastName, emailAddress, password, confirmPassword } = this.state
+
+    if (password === confirmPassword){
+      this.setState({errors: []}) 
+    } else {
+      this.setState({errors: ['passwords must match']})
+      return 
     }
-    // Move below function to Data file?????
+    
+  
     try {
       let pass
       if (password == null) {
@@ -74,8 +84,8 @@ export default class UserSignUp extends Component {
       <input id="emailAddress" name="emailAddress" type="email" onChange={this.change} />
       <label htmlFor="password">Password</label>
       <input id="password" name="password" type="password" onChange={this.change}/>
-      {/* <label htmlFor="confirmPassword">Confirm Password</label>
-      <input id="confirmPassword" name="confirmPassword" type="password" onChange={this.change} /> */}
+      <label htmlFor="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" name="confirmPassword" type="password" onChange={this.change} />
       <button className="button" type="submit">Sign Up</button><button className="button button-secondary" onClick={this.cancel}>Cancel</button>
     </form>
     <p>Already have a user account? Click here to <Link to="/signin">sign in</Link></p>

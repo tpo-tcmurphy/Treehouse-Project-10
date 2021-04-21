@@ -18,7 +18,7 @@ function CourseDetail(props) {
         setDataState(response.data)
         setUser(`${response.data.User.firstName} ${response.data.User.lastName}`)
       })
-  }, [])
+  })
 
   const handleDelete = (e) => {
     e.preventDefault()

@@ -1,14 +1,11 @@
 import React from 'react'
 import {
-  Link,
   BrowserRouter,
   Switch,
-  Route,
-  useParams
+  Route
 } from 'react-router-dom'
 
 import '../styles/index.css'
-
 
 // Components
 import Header from './Header'
@@ -20,6 +17,7 @@ import UserSignOut from './UserSignOut'
 import UserSignUp from './UserSignUp'
 import CreateCourse from './CreateCourse'
 import UpdateCourse from './UpdateCourse'
+
 // Components with Context
 import withContext from '../Context'
 const HeaderWithContext = withContext(Header)
@@ -29,7 +27,6 @@ const UserSignOutWithContext = withContext(UserSignOut)
 const UserSignUpWithContext = withContext(UserSignUp)
 const CreateCourseWithContext = withContext(CreateCourse)
 const UpdateCourseWithContext = withContext(UpdateCourse)
-// NOTE: reset.css is being imported in index.html - remove if not needed (clashes with index.css??)
 
 function App () {
   return (

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+// CONVERT TO HOOK
+// ALSO NEED TO ADD LOGIC FOR CONFIRM PASSWORD
 export default class UserSignUp extends Component {
   
   state = {

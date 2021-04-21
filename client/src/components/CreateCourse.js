@@ -1,8 +1,6 @@
-import React, { Component, useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import React, { Component, useState } from 'react'
 
-
+// CONVERT TO HOOK
 export default class CreateCourse extends Component {
   state = {
     courseTitle: '',
@@ -74,7 +72,6 @@ export default class CreateCourse extends Component {
       password: authUser.password
     }
     
-    // Move below function to Data file?????
     context.data.createCourse(course, authCreds.emailAddress, authCreds.password)
       .then(() => {
         console.log('This course has been created!')

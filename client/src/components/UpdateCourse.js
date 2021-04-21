@@ -1,7 +1,5 @@
-import React, { Component, useState, useRef, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import ReactMarkdown from 'react-markdown'
 
 function UpdateCourse (props) {
   // const params = useParams()
@@ -25,12 +23,10 @@ function UpdateCourse (props) {
     setDataState({...dataState, [name]: value})
   }
 
-
   const submit = async (e) => {
     e.preventDefault()
     const { context } = props
     const authUser = context.authenticatedUser
-    
 
     const course = {
       id: dataState.id,

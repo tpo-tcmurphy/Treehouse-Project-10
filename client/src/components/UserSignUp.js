@@ -48,8 +48,8 @@ export default class UserSignUp extends Component {
     }
   }  
 
-  cancel = (e) => {
-    e.preventDefault()
+  cancel = (event) => {
+    event.preventDefault()
     this.props.history.push('/')
   }
   render() {

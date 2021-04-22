@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
-// CONVERT TO HOOK
+
+/**
+ * Renders course input form, and creates a new course on submit
+ */
 export default class CreateCourse extends Component {
   state = {
     courseTitle: '',

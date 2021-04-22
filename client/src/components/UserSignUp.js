@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-// CONVERT TO HOOK
-// ALSO NEED TO ADD LOGIC FOR CONFIRM PASSWORD
+/**
+ * Renders input form and handles creation of user in database
+ */
+
 export default class UserSignUp extends Component {
   
   state = {
@@ -18,6 +20,7 @@ export default class UserSignUp extends Component {
   change = (event) => {
     const name = event.target.name
     const value = event.target.value
+    
     const dict = {}
     dict[name] = value
 

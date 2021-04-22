@@ -24,6 +24,7 @@ export class Provider extends Component {
           authenticatedUser: user,
         }
       })
+      // Sets cookie/auth for use of site
       Cookies.set('authenticatedUser', JSON.stringify(user), {expires: 1})
     }
     return user
@@ -31,6 +32,7 @@ export class Provider extends Component {
 
   signOut = () => {
     this.setState({ authenticatedUser: null })
+    // Removes cookie/auth from site
     Cookies.remove('authenticatedUser')
   }
 

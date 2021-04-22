@@ -3,6 +3,12 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Forbidden from './Forbidden'
 
+/**
+ * Gets and renders course
+ * Then handles input value changes/submit for updates to the course
+ * @param {*} props
+ */
+
 function UpdateCourse (props) {
   const { id } = useParams()
   const [dataState, setDataState] = useState([])
@@ -24,6 +30,9 @@ function UpdateCourse (props) {
       })
   }, [id, props.history])
 
+  // Ensures that only authenticated user can navigate to /update route
+  // (even if appended in url)
+
   const { context } = props
   const authUser = context.authenticatedUser
   if (authUser && dataState.User && authUser.data.emailAddress !== dataState.User.emailAddress) {
@@ -36,7 +45,7 @@ function UpdateCourse (props) {
     const name = event.target.name
     const value = event.target.value
 
-    setDataState({...dataState, [name]: value})
+    setDataState({ ...dataState, [name]: value })
   }
 
   const submit = async (e) => {
@@ -57,6 +66,7 @@ function UpdateCourse (props) {
       password: authUser.password
     }
 
+    // Calls updateCourse, passed in through context (function in Data.js)
     context.data.updateCourse(id, course, authCreds.emailAddress, authCreds.password)
       .then(() => {
         console.log('This course has been updated!')
@@ -95,7 +105,7 @@ function UpdateCourse (props) {
             <input id='estimatedTime' name='estimatedTime' type='text' onChange={change} value={dataState.estimatedTime || ''} />
 
             <label htmlFor='materialsNeeded'>Materials Needed</label>
-            <textarea id='materialsNeeded' name='materialsNeeded' onChange={change} value={dataState.materialsNeeded || ''} /> 
+            <textarea id='materialsNeeded' name='materialsNeeded' onChange={change} value={dataState.materialsNeeded || ''} />
           </div>
         </div>
         <button className='button' type='submit'>Update Course</button><button className='button button-secondary' onClick={cancel}>Cancel</button>

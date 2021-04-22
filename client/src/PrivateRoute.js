@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { Consumer } from './Context'
-
+// Wraps routes and redirects to sign in if there is no authenticated user
 function PrivateRoute({ component: Component, ...rest }) {
   return (
     <Consumer>

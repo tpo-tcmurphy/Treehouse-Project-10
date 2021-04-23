@@ -5,8 +5,6 @@ import {
   Route
 } from 'react-router-dom'
 
-import '../styles/index.css'
-
 // Error Messages
 import Forbidden from './Forbidden'
 import NotFound from './NotFound'

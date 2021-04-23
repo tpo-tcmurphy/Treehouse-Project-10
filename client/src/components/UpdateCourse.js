@@ -81,7 +81,7 @@ function UpdateCourse (props) {
 
   const cancel = (e) => {
     e.preventDefault()
-    props.history.push('/')
+    props.history.push('/courses/' + id)
   }
 
   return (
